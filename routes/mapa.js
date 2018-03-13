@@ -9,6 +9,8 @@ var ejs = require("ejs")
 const pg = require('pg');
 
 
+
+
 var conString = "postgres://postgres:agua@localhost:5432/agua_doce";
 
 const results = [];
@@ -25,7 +27,7 @@ pg.connect(conString, (err, client, done) => {
 });
 
 router.get('/', function(req, res, next) {
-  	res.render('mapa', { 'BASE_URL': JSON.stringify(results) });
+  	res.render('mapa', { BASE_URL: JSON.stringify(results) });
 });
 
 

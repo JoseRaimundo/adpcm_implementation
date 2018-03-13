@@ -31,7 +31,7 @@
 
 </head>
 
-<body ng-controller="mainController">
+<body ng-controller="mainController"  onload="initialize()">
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
@@ -52,11 +52,24 @@
 
       <div class="row">
 
-        <!-- class="col s12 m12 l8" -->
+    <script>
+      // Don't use window.onLoad like this in production, because it can only listen to one function.
+      window.onload = function() {
+        // Expose to window namespase for testing purposes
+        window.zoomTiger = svgPanZoom('#mapa_paraiba', {
+          zoomEnabled: true,
+          controlIconsEnabled: true,
+          fit: true,
+          center: true,
+          // viewportSelector: document.getElementById('demo-tiger').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
+        });
 
-        <svg id="mapa_paraiba" class="col-lg-8" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%"
-          style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; padding: 0px; padding-top: 60px;"
-          viewBox="0 0 474000 279400">
+      };
+    </script>
+
+        <!-- class="col s12 m12 l8" -->
+        <svg id="mapa_paraiba" class="col-lg-8" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="90%" height="500px"
+          style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; padding: 0px; padding-top: 0px;">
           <defs>
             <style type="text/css">
               .none {
@@ -64,7 +77,7 @@
               }
 
               .temPoco {
-                fill: #70AD47
+                fill: #58D3F7
               }
 
               .iegmBM {
@@ -772,8 +785,6 @@
 
          
          
-
-        
         </svg>
         <div id="map-card" class="col-lg-4" style="height: 100%; padding-left: 0px; padding-right: 0px;">
           <div class="card-image">
@@ -828,11 +839,37 @@
           </div>
 
         </div>
+
+
+
+
+
+        <div id="municipio_solo">
+
+            <svg id="municipio" class="col-lg-8" xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; padding: 0px; padding-top: 60px;"
+              viewBox="0 0 474000 279400">
+              <g id="municipio-svg" style="visibility: visible;">
+                <path id="municipio-2500106" class="btn tooltipped naoselecionado" data-position="left" data-delay="0" data-tooltip="Água Branca"
+                  d="M130230 188364l-1631 -3367 -12 -1092 2480 -1633 2915 -8791 -1149 -2797 -1805 -493 423 -2033 -374 -2160 747 -1025 -99 -276 1081 -90 515 433 303 -1309 1261 634 2242 -271 3341 3909 1938 -86 457 488 5337 8054 -2069 1268 -2112 815 -181 1168 -927 821 -1161 709 -2146 -235 -1064 -796 -1887 1374 -608 1406 -2682 241 -395 985 254 1224 -1458 1239 -850 -237 -684 1925 0 -2z"
+                />
+              </g>
+            </svg>
+            
+
+          
+        </div>
       </div>
     </div>
   </section>
 
-  <p> TESTE<%=BASE_URL%></p>
+
+
+
+
+<h2 style="display:none;" id="dados_municipio"><%-BASE_URL %></h2>
+
+
 
   <div class="copyright py-4 text-center text-white">
     <div class="container">
@@ -841,9 +878,11 @@
   </div>
 
 
+ 
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
+
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
@@ -856,10 +895,11 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <!-- <script src="js/js.js" type="text/javascript"></script> -->
   <!-- Manager the map content and functions -->
-  <script src="js/mapa.js"  type="text/javascript"></script>
+ 
 
   <!-- Custom scripts for this template -->
-  <!-- <script src="js/freelancer.js"></script> -->
+  <script src="js/dist/svg-pan-zoom.js"></script> 
+  <script src="js/mapa.js"></script> 
 </body>
 
 </html>
