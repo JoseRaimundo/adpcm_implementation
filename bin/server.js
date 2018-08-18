@@ -32,20 +32,6 @@ function normalizePort(val){
 }
 
 
-
-// app.use('/', route)
-
-// server.listen(port);
-
-// server.on('error', onError);
-
-// server.on('listening', onListening);
-
-// console.log("API RODANDO NA PORTA" + port);
-
-
-
-
 function onError(error){
     if (error.syscall !== 'listen'){
         throw error;

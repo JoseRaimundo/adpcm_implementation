@@ -2,18 +2,37 @@
 'use strict'
 
 const express = require('express');
+// const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const pg = require('pg');
+
 
 const app = express();
 const router = express.Router();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
-const route = router.get('/', (requestAnimationFrame, res, next) =>{
-    res.status(200).send({
-        title: "Node Store API",
-        version: "0.0.1"
-    });
-});
 
-app.use('/', route);
+// Conxão com o banco
+
+
+
+// mongoose.connect('mongodb://projeto4d:projeto4d@ds123822.mlab.com:23822/aguadoce');
+
+// Carregar models
+const Estado = require('./models/estado');
+
+
+// Carrega as Rotas
+const index = require('./routers/index-route');
+const estados = require('./routers/estado-route');
+
+
+
+app.use('/', index);
+app.use('/estados', estados) ;
 
 module.exports = app;
