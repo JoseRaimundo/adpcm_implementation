@@ -10,6 +10,7 @@ const pg = require('pg');
 const app = express();
 const router = express.Router();
 
+app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
