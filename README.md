@@ -1,5 +1,19 @@
 ### ADPCM
 
+Compile
+
+ > make  clean; make
+
+
+Running encoder
+
+ > ./bin/main e input_file output_file
+
+
+Running decoder
+
+
+ > ./bin/main d input_file output_file
 
 
 
