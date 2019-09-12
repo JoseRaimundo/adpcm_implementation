@@ -153,23 +153,23 @@ int ADPCMDecoder(char code, struct ADPCMstate *state){
     */
     diffq = step >> 3;
     if( code & 4 )
-    diffq += step;
+        diffq += step;
     if( code & 2 )
-    diffq += step >> 1;
+        diffq += step >> 1;
     if( code & 1 )
-    diffq += step >> 2;
+        diffq += step >> 2;
     /* Add the difference to the predicted sample
     */
     if( code & 8 )
-    predsample -= diffq;
+        predsample -= diffq;
     else
-    predsample += diffq;
+        predsample += diffq;
     /* Check for overflow of the new predicted sample
     */
     if( predsample > 32767 )
-    predsample = 32767;
+        predsample = 32767;
     else if( predsample < -32767 )
-    predsample = -32767;
+        predsample = -32767;
     /* Find new quantizer step size by adding the old index and a
     table lookup using the ADPCM code
     */
@@ -177,9 +177,9 @@ int ADPCMDecoder(char code, struct ADPCMstate *state){
     /* Check for overflow of the new quantizer step size index
     */
     if( index < 0 )
-    index = 0;
+        index = 0;
     if( index > 88 )
-    index = 88;
+        index = 88;
     /* Save predicted sample and quantizer step size index for next
     iteration
     */
