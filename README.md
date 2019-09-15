@@ -1,3 +1,4 @@
+
 ### ADPCM
 
 Compile
@@ -35,14 +36,14 @@ Running decoder
 
 #### Encoder
 
-
+![adpcm encoder](https://github.com/JoseRaimundo/adpcm_implementation/blob/master/img/endoder_adpcm.png?raw=true)
 
 
 
 
 #### Decpder
 
-
+![adpcm decoder](https://github.com/JoseRaimundo/adpcm_implementation/blob/master/img/decoder_adpcm.png?raw=true)
 
 
 ### Reference
