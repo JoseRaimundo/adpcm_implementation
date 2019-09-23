@@ -1,22 +1,28 @@
 import csv
-def readData(emotion_file):
-    print("Verificando combinações já processadas ...")
-    emotion = []
-    with open(emotion_file) as csvfile:
-        readCSV = csv.reader(csvfile, delimiter=' ')
-        for row in readCSV:
-            emotion.append(row)
-    return emotion
-
-data_medo = readData('input/medo.csv')
-print(data_medo)
-
-
 
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import svm, datasets
+from sklearn import svm
 
+def readData(emotion_file):
+    print("Verificando combinações já processadas ...")
+    emotions = []
+    labes = []
+    with open(emotion_file) as csvfile:
+        readCSV = csv.reader(csvfile, delimiter=' ')
+        for row in readCSV:
+            emotion = []
+            emotion.append(float(row[0]))
+            emotion.append(float(row[1]))
+            labes.append(int(row[2]))
+            emotions.append(emotion)
+    emotions = np.array(emotions)
+    labes = np.array(labes)
+    
+    return emotions, labes
+
+data_emotion, labes = readData('input/emotions_raw.csv')
+print(data_emotion)
 
 def make_meshgrid(x, y, h=.02):
     """Create a mesh of points to plot in
@@ -54,12 +60,9 @@ def plot_contours(ax, clf, xx, yy, **params):
     out = ax.contourf(xx, yy, Z, **params)
     return out
 
-
-# import some data to play with
-iris = datasets.load_iris()
 # Take the first two features. We could avoid this by using a two-dim dataset
-X = iris.data[:, :2]
-y = iris.target
+X = data_emotion
+y = labes
 
 # we create an instance of SVM and fit out data. We do not scale our
 # data since we want to plot the support vectors
@@ -85,12 +88,12 @@ xx, yy = make_meshgrid(X0, X1)
 
 for clf, title, ax in zip(models, titles, sub.flatten()):
     plot_contours(ax, clf, xx, yy,
-        cmap=plt.cm.coolwarm, alpha=0.8)
+                  cmap=plt.cm.coolwarm, alpha=0.8)
     ax.scatter(X0, X1, c=y, cmap=plt.cm.coolwarm, s=20, edgecolors='k')
     ax.set_xlim(xx.min(), xx.max())
     ax.set_ylim(yy.min(), yy.max())
-    ax.set_xlabel('Sepal length')
-    ax.set_ylabel('Sepal width')
+    ax.set_xlabel('Pitch')
+    ax.set_ylabel('TCZ')
     ax.set_xticks(())
     ax.set_yticks(())
     ax.set_title(title)
