@@ -3,6 +3,8 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import svm
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
 
 def readData(emotion_file):
     print("Verificando combinações já processadas ...")
@@ -21,8 +23,8 @@ def readData(emotion_file):
     
     return emotions, labes
 
-data_emotion, labes = readData('input/emotions_raw.csv')
-print(data_emotion)
+data_emotion, labes = readData('input/emotions.csv')
+# print(data_emotion)
 
 def make_meshgrid(x, y, h=.02):
     """Create a mesh of points to plot in
@@ -57,7 +59,24 @@ def plot_contours(ax, clf, xx, yy, **params):
     """
     Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
     Z = Z.reshape(xx.shape)
+    cont = 0
     out = ax.contourf(xx, yy, Z, **params)
+    # acc = accuracy_score(y, xx.shape, 141)
+    acc = SVC.score(clf, X, y, sample_weight=None)
+
+    # for y_t, z_t in zip(yy, Z):
+    #     if y_t != z_t:
+    #         cont = cont + 1
+
+    print(">>>>>>>>>> 1")
+    print((acc))
+    print(">>>>>>>>>> 2")
+    # print((yy))
+    # res = (1-(cont/len(y)) )  * 100
+    # print(res)
+   
+    
+    
     return out
 
 # Take the first two features. We could avoid this by using a two-dim dataset
