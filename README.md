@@ -41,7 +41,7 @@ Running decoder
 
 
 
-#### Decpder
+#### Decoder
 
 ![adpcm decoder](https://github.com/JoseRaimundo/adpcm_implementation/blob/master/img/decoder_adpcm.png?raw=true)
 
