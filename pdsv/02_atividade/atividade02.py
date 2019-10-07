@@ -1,6 +1,7 @@
 # http://bastian.rieck.ru/blog/posts/2014/simple_experiments_speech_detection/
 
 import numpy as np
+import sys
 import matplotlib.pyplot as plt
 from random import random
 from scipy.spatial.distance import euclidean
@@ -22,7 +23,8 @@ def zeroCrossingRate(frame):
     return len(np.where(np.diff(signs))[0])# / len(frame)
 
 # Carregando o sinal de voz
-signal, samplerate = sf.read('audio_base_walisson.wav')
+file_audio = sys.argv[1]
+signal, samplerate = sf.read(file_audio)
 sampletime = 1 / samplerate
 #signal = signal[2*samplerate:]#3*samplerate]
 time = np.arange(0, len(signal) * sampletime, sampletime)
@@ -33,7 +35,7 @@ frame_time = 0.02
 samples_frame = int(frame_time * samplerate)
 shift_frame = int(samples_frame * overlap)
 qtd_frames = len(signal) * sampletime * frame_time * overlap
-k_means = True
+k_means = False
 
 # Criando arrays para armazenar Energia, Magnitude e TCZ
 frame_energy = []
@@ -138,6 +140,27 @@ plt.plot(frame_energy, frame_tcz, '.')
 plt.xlabel('Energia Segmental')
 plt.ylabel('TCZ')
 plt.show()
+
+
+
+# Plot autocorrelation
+
+plot.acorr(data, maxlags=9)
+
+
+# Add labels to autocorrelation plot
+
+plot.title('Autocorrelation of XYZ stock price data')
+
+plot.xlabel('Lag')
+
+plot.ylabel('Autocorrelation')
+
+ 
+
+# Display the autocorrelation plot
+
+plot.show()
 
 # IMPLEMENTAÇÃO DO K-MEANS
 if (k_means):
